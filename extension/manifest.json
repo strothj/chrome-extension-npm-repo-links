@@ -1,0 +1,14 @@
+{
+  "name": "NPM to Github Search Results",
+  "description": "Add direct links to Github for NPM search results.",
+  "version": "1.0",
+  "manifest_version": 2,
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.com/search*"],
+      "js": ["js/content-script.js"]
+    }
+  ],
+  "web_accessible_resources": ["js/content-script-module.js", "js/lib/*.js"]
+}
