@@ -51,11 +51,19 @@ Object.keys(lookups).forEach(async key => {
       log("Request failed", query, packageJsonRequest.statusText);
     }
 
-    const packageJson: { repository?: string } = JSON.parse(
+    const packageJson: { repository?: string | { url?: string } } = JSON.parse(
       await packageJsonRequest.text(),
     );
-    let href = packageJson.repository;
-    if (!href) return;
+
+    let href: string;
+    if (!packageJson.repository) return;
+
+    if (typeof packageJson.repository === "string") {
+      href = packageJson.repository;
+    } else {
+      if (!packageJson.repository.url) return;
+      href = packageJson.repository.url;
+    }
 
     if (!/https?:\/\//.test(href)) href = `https://github.com/${href}`;
 
