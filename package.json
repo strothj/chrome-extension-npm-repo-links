@@ -5,14 +5,18 @@
   "author": "strothj <jason@jasons.io>",
   "license": "MIT",
   "scripts": {
-    "start": "rimraf extension/js && tsc -w",
-    "build": "rimraf extension/js && tsc",
+    "start": "rimraf extension/js && tsc -p ./tsconfig.build.json -w",
+    "build": "rimraf extension/js && tsc -p ./tsconfig.build.json",
+    "test": "jest",
     "lint": "lint -p ./"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.72",
+    "@types/jest": "^23.3.1",
+    "jest": "^23.5.0",
     "prettier": "^1.14.2",
     "rimraf": "^2.6.2",
+    "ts-jest": "^23.1.4",
     "tslint": "^5.11.0",
     "tslint-config-airbnb": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",

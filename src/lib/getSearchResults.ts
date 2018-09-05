@@ -34,8 +34,4 @@ export const getSearchResults = (): ISearchResult[] => {
   );
 
   return results;
-  // // Remove duplicates and return result.
-  // return results.filter((r, index, array) => {
-  //   return array.indexOf(r) === index;
-  // });
 };
