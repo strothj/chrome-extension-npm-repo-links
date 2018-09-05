@@ -15,6 +15,7 @@ module.exports = {
     // import { trimPackageName } from "./trimPackageName";
     "(\\.+\\/)(.*)\\.js$": "$1$2",
   },
+  setupFiles: ["<rootDir>/src/test-setup.ts"],
   globals: {
     "ts-jest": {
       tsConfigFile: "tsconfig.test.json",
