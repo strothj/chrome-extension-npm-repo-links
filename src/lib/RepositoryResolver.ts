@@ -1,3 +1,5 @@
+import { getRepositoryUrl } from "./getRepositoryUrl.js";
+
 export class RepositoryResolver {
   private subscriptions: Record<
     string,
@@ -31,21 +33,10 @@ export class RepositoryResolver {
             throw new Error(request.statusText);
           }
 
-          const packageJson: {
-            repository?: string | { url?: string };
-          } = JSON.parse(await request.text());
+          const packageJson: unknown = JSON.parse(await request.text());
 
-          let href: string;
-          if (!packageJson.repository) return;
-
-          if (typeof packageJson.repository === "string") {
-            href = packageJson.repository;
-          } else {
-            if (!packageJson.repository.url) return;
-            href = packageJson.repository.url;
-          }
-
-          if (!/https?:\/\//.test(href)) href = `https://github.com/${href}`;
+          const href = getRepositoryUrl(packageJson);
+          if (href === null) return;
 
           this.subscriptions[packageName].successHandlers.forEach(handler => {
             handler(href);
